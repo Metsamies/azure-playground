@@ -22,4 +22,17 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.MapGet("/test", () =>
+{
+    try
+    {
+        var env = Environment.GetEnvironmentVariable("MY_ENV_VARIABLE");
+        return $"{{ \"my-env-variable\": {env} }}";
+    } 
+    catch (Exception ex)
+    {
+        return ex.Message;
+    }
+});
+
 app.Run();
